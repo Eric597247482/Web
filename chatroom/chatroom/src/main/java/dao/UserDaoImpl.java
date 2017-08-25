@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import utils.DBUtils;
 import vo.User;
@@ -39,6 +40,61 @@ public class UserDaoImpl implements UserDao {
 			DBUtils.closeAll(rs, ps, conn);
 		}
 		return existUser;
+	}
+
+	//添加注册用户
+	@Override
+	public void addUser(User user) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+			String sql = "insert into user(username,password,type) values(?,?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getType());
+			
+//			int i = ps.executeUpdate();
+			ps.execute();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("注册失败！");
+		}finally{
+			DBUtils.closeAll(null, ps, conn);
+		}
+		
+		
+	}
+
+	//以用户名查找用户,是否已经存在该用户？
+	@Override
+	public boolean findUserByName(String username) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+			String sql = "select * from user where username = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			
+			if(rs.next())
+				return true;//查到该用户，返回true
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBUtils.closeAll(null, ps, conn);
+		}
+		return false;//未查到该用户，该用户名未被注册
+	
 	}
 	
 	

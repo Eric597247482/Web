@@ -81,6 +81,7 @@ var sysBBS = "<span style='font-size:14px; line-height:30px;'>欢迎光临心之
 	    setTimeout('checkScrollScreen()',500);
 	}
 	
+	//检查用户是否过期
 	function check(){
 		$.post("${pageContext.request.contextPath}/user?method=check",function(data){
 			if(data == 1){

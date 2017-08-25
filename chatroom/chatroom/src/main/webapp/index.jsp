@@ -53,11 +53,21 @@
 			</tr>
 			<tr>
 				<td width="53" align="center" valign="top" class="word_dark">&nbsp;</td>
-				<td width="216" align="center" valign="top" class="word_dark">
-				<input name="Submit" type="submit" class="btn_bg" value="进 入">
+				<td width="216" align="left" valign="top" class="word_dark">
+				<input name="Submit" type="submit" class="btn_bg" value="登录">
 				</td>
-				<td width="94" valign="top" class="word_dark">
+				<!--  
+				<td width="216" align= "right" valign="top" class="word_dark">
+					<a href="reg.jsp">注册</a>
 				</td>
+				-->
+				  
+				<td width="216" align="right" valign="top" class="word_dark">
+				<a href="register.jsp">
+					<input name="Register" type="button" value="注册" >
+				</a>
+				</td>
+				
 			</tr>
 			
 

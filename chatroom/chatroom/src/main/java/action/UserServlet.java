@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import service.UserService;
-import service.UserServieImpl;
+import service.UserServiceImpl;
 import utils.BaseServlet;
 import vo.User;
 
@@ -29,7 +29,7 @@ public class UserServlet extends BaseServlet {
 		try {
 			BeanUtils.populate(user, map);
 			// 调用Service层处理数据 
-			UserService us = new UserServieImpl();
+			UserService us = new UserServiceImpl();
 			User existUser = us.login(user);
 			if (existUser == null) {
 				// 用户登录失败
